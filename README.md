@@ -10,6 +10,14 @@ Interactive web app to simulate and visualize how quantum noise degrades quantum
 
 ---
 
+## 🚀 Live Demo
+
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://quantum-noise-simulator.streamlit.app/)
+
+🔗 **[https://quantum-noise-simulator.streamlit.app/](https://quantum-noise-simulator.streamlit.app/)**
+
+---
+
 ## ✨ Features
 
 - **5 Noise Models**: Bit Flip, Phase Flip, Depolarizing, Amplitude Damping (T1), Phase Damping (T2)
@@ -18,13 +26,13 @@ Interactive web app to simulate and visualize how quantum noise degrades quantum
 - **Fidelity decay sweep curve** across noise probabilities
 - **Side-by-side measurement probability bar charts** (Ideal vs Noisy)
 - **Real-time fidelity metric** with 4-panel KPI dashboard
+- **Zero-Noise Extrapolation (ZNE)** — quantum error mitigation simulation
+- **T1/T2 Time Decay curves** — time-based coherence simulation in microseconds
+- **Density Matrix Heatmap** — visualize decoherence in the density matrix
+- **Noise Comparison Mode** — all 5 noise models side by side
+- **Grover's Algorithm** — see how noise breaks amplitude amplification
+- **Bell Inequality (CHSH) Test** — quantum vs classical bounds under noise
 - **Dark-themed UI** optimized for data visualization
-
----
-
-## 🚀 Live Demo
-
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io)
 
 ---
 
@@ -63,11 +71,14 @@ streamlit run app.py
 | **Superposition** | A qubit's ability to be in multiple states simultaneously until measured |
 | **Entanglement** | Quantum correlation between qubits where the state of one instantly influences another |
 | **Decoherence** | The loss of quantum coherence due to environmental noise, turning pure states into mixed states |
-| **T1 decay** | Energy relaxation time — how long a qubit stays in the excited |1⟩ state before decaying to |0⟩ |
+| **T1 decay** | Energy relaxation time — how long a qubit stays in the excited \|1⟩ state before decaying to \|0⟩ |
 | **T2 decay** | Dephasing time — how long a qubit maintains phase coherence in a superposition |
 | **Fidelity** | A measure (0–1) of how closely a noisy quantum state matches the ideal state |
 | **Bloch Sphere** | A geometric representation of a qubit's state as a point on (or inside) a unit sphere |
 | **Noise Model** | A mathematical description of the errors that affect quantum gates and qubits |
+| **ZNE** | Zero-Noise Extrapolation — a quantum error mitigation technique that estimates ideal results by extrapolating from noisy runs |
+| **Density Matrix** | A matrix representation of a quantum state that handles both pure and mixed (noisy) states |
+| **CHSH Inequality** | A Bell test — quantum mechanics violates it (S > 2), classical physics cannot |
 
 ---
 
@@ -81,7 +92,20 @@ quantum-noise-simulator/
 │   ├── circuits.py               # Quantum circuit builders
 │   ├── noise_models.py           # Noise model definitions
 │   ├── visualizer.py             # Plots: bar chart, fidelity curve
-│   └── bloch.py                  # Bloch sphere visualizer
+│   ├── bloch.py                  # Bloch sphere visualizer
+│   ├── mitigation.py             # Zero-Noise Extrapolation (ZNE)
+│   ├── coherence.py              # T1/T2 time decay simulation
+│   ├── density_matrix.py         # Density matrix heatmap
+│   ├── comparison.py             # Noise comparison across models
+│   ├── grover.py                 # Grover's algorithm with noise
+│   └── bell.py                   # Bell inequality (CHSH) test
+├── pages/
+│   ├── 1_🧮_Error_Mitigation.py  # ZNE page
+│   ├── 2_🌡️_Coherence_Decay.py  # T1/T2 page
+│   ├── 3_🔥_Density_Matrix.py    # Density matrix page
+│   ├── 4_📡_Noise_Comparison.py  # Comparison page
+│   ├── 5_🔍_Grovers_Algorithm.py # Grover's page
+│   └── 6_🔗_Bell_Inequality.py   # Bell inequality page
 ├── .streamlit/
 │   └── config.toml               # Streamlit dark theme config
 ├── requirements.txt
@@ -97,8 +121,9 @@ This simulator directly mirrors the challenges faced by QPU engineers at compani
 
 - **Qubit calibration**: T1 and T2 times must be measured and optimized for each physical qubit; this app visualizes their effect on circuit fidelity.
 - **Gate fidelity**: Every quantum gate introduces noise; the depolarizing and Pauli error models here approximate real gate error rates.
-- **Noise mitigation**: Understanding how noise accumulates across a circuit is the first step toward techniques like zero-noise extrapolation and probabilistic error cancellation.
+- **Noise mitigation**: Zero-Noise Extrapolation and other techniques are implemented to show how engineers recover ideal results from noisy hardware.
 - **Bloch sphere diagnostics**: QPU engineers use Bloch sphere representations to visualize qubit state drift during calibration sequences.
+- **Randomized benchmarking**: The noise comparison and fidelity sweep tools mirror standard QPU characterization workflows.
 
 By interactively exploring noise parameters, users gain intuition for the engineering trade-offs at the heart of near-term quantum computing.
 
